@@ -18,8 +18,11 @@ function initializePage() {
 
 	// Add any additional listeners here
 	// example: $("#div-id").click(functionToCall);
+	$("a.project-description").hide();
+
 	$("a.thumbnail").click(projectClick);
     $("#submitBtn").click(updateProject); 
+    $("a.project-description").click(projectClick);
 }
 
 function updateProject(e) {
@@ -48,9 +51,14 @@ function projectClick(e) { 
 
     var containingProject = $(this).closest(".project"); 
     var description = $(containingProject).find(".project-description");
-    if (description.length == 0) { 
-       $(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>"); 
+    var myImage = $(containingProject).find(".displayImg");
+
+    if (description.is(":visible")) { 
+    	description.hide();
+    	myImage.show();
+    	console.log("description visible");
     } else { 
-       description.html("<p>Stop clicking on me! You just did it at " + (new Date()) + "</p>");
+    	myImage.hide();
+    	description.show();
     }
 }
